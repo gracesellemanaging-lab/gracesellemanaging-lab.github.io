@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    PORTFOLIO SCRIPT â€” all vanilla JS, organized by feature.
    Each feature is wrapped in its own function and initialized at the bottom.
    ========================================================================== */
@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
    initScrollProgress();
   initBgDecor();
   initNavbar();
+  initNavDropdown();
   initCursorGlow();
   initTypingEffect();
   initReveal();
@@ -518,4 +519,112 @@ function initBackToTop(){
   const btn = document.getElementById('backToTop');
   if (!btn) return;
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+
+/* ==========================================================================
+   NAVBAR DROPDOWN MENU  -  JavaScript DOM Activity
+   Pure vanilla JS. No libraries.
+   --------------------------------------------------------------------------
+   Behaviour:
+     - click the toggle to open / close the menu
+     - click anywhere outside to close
+     - press Escape to close and return focus to the toggle
+     - choosing a link closes the menu (and the mobile drawer)
+     - full keyboard nav: ArrowDown / ArrowUp / Home / End / Tab
+     - aria-expanded stays in sync for screen readers
+   ========================================================================== */
+function initNavDropdown(){
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  if (!dropdowns.length) return;
+
+  let openOne = null;               // only one menu open at a time
+
+  const parts = (d) => ({
+    toggle: d.querySelector('.nav-dropdown__toggle'),
+    menu:   d.querySelector('.nav-dropdown__menu'),
+    items:  [...d.querySelectorAll('.nav-dropdown__menu a')]
+  });
+
+  function open(d){
+    if (openOne && openOne !== d) close(openOne);
+    const p = parts(d);
+    d.classList.add('is-open');
+    p.toggle.setAttribute('aria-expanded', 'true');
+    openOne = d;
+  }
+
+  function close(d){
+    const p = parts(d);
+    d.classList.remove('is-open');
+    p.toggle.setAttribute('aria-expanded', 'false');
+    if (openOne === d) openOne = null;
+  }
+
+  function focusItem(items, i){
+    if (!items.length) return;
+    if (i < 0) i = items.length - 1;
+    if (i >= items.length) i = 0;
+    items[i].focus();
+  }
+
+  dropdowns.forEach(d => {
+    const p = parts(d);
+    if (!p.toggle || !p.menu) return;
+
+    p.toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      d.classList.contains('is-open') ? close(d) : open(d);
+    });
+
+    p.toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        open(d);
+        focusItem(p.items, 0);
+      } else if (e.key === 'ArrowUp'){
+        e.preventDefault();
+        open(d);
+        focusItem(p.items, p.items.length - 1);
+      } else if (e.key === 'Escape'){
+        close(d);
+      }
+    });
+
+    p.menu.addEventListener('keydown', (e) => {
+      const i = p.items.indexOf(document.activeElement);
+      switch (e.key){
+        case 'ArrowDown': e.preventDefault(); focusItem(p.items, i + 1); break;
+        case 'ArrowUp':   e.preventDefault(); focusItem(p.items, i - 1); break;
+        case 'Home':      e.preventDefault(); focusItem(p.items, 0); break;
+        case 'End':       e.preventDefault(); focusItem(p.items, p.items.length - 1); break;
+        case 'Escape':    e.preventDefault(); close(d); p.toggle.focus(); break;
+        case 'Tab':       close(d); break;
+      }
+    });
+
+    // picking a link closes the dropdown and the mobile drawer
+    p.items.forEach(a => a.addEventListener('click', () => {
+      close(d);
+      const links  = document.getElementById('navLinks');
+      const burger = document.getElementById('navToggle');
+      if (links)  links.classList.remove('is-open');
+      if (burger){ burger.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); }
+    }));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (openOne && !openOne.contains(e.target)) close(openOne);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && openOne){
+      const t = openOne.querySelector('.nav-dropdown__toggle');
+      close(openOne);
+      if (t) t.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => { if (openOne) close(openOne); });
 }
