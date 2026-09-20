@@ -198,7 +198,7 @@ body.is-loading{ overflow:hidden; height:100vh; }
 .nav-link.active::after, .nav-link:hover::after{ width:100%; }
 .navbar__cta{ display:inline-flex; }
 .navbar__toggle{ display:none; flex-direction:column; gap:6px; width:30px; }
-.navbar__toggle span{ height:3px; background: var(--text); border-radius: 3px; transition: transform .3s, opacity .3s; }
+.navbar__toggle span{ height:3px; background: var(--secondary); border-radius: 3px; transition: transform .3s, opacity .3s; }
 .navbar__toggle.is-open span:nth-child(1){ transform: translateY(9px) rotate(45deg); }
 .navbar__toggle.is-open span:nth-child(2){ opacity:0; }
 .navbar__toggle.is-open span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
