@@ -197,8 +197,8 @@ body.is-loading{ overflow:hidden; height:100vh; }
 .nav-link.active{ color: var(--text); }
 .nav-link.active::after, .nav-link:hover::after{ width:100%; }
 .navbar__cta{ display:inline-flex; }
-.navbar__toggle{ display:none; flex-direction:column; gap:6px; width:30px; }
-.navbar__toggle span{ height:3px; background: var(--secondary); border-radius: 3px; transition: transform .3s, opacity .3s; }
+.navbar__toggle{ display:none; flex-direction:column; gap:6px; width:30px; opacity:1; position:relative; z-index:960; }
+.navbar__toggle span{ display:block; height:3px; background: var(--secondary); border-radius: 3px; transition: transform .3s, opacity .3s; opacity:1; width:100%; }
 .navbar__toggle.is-open span:nth-child(1){ transform: translateY(9px) rotate(45deg); }
 .navbar__toggle.is-open span:nth-child(2){ opacity:0; }
 .navbar__toggle.is-open span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
@@ -206,13 +206,14 @@ body.is-loading{ overflow:hidden; height:100vh; }
 @media (max-width: 880px){
   .navbar__links{
     position: fixed; top: var(--nav-h); left:0; right:0; flex-direction:column; align-items:center;
-    background: rgba(11,6,23,.97); backdrop-filter: blur(20px); padding: 30px 0 40px; gap: 22px;
+    background: var(--bg); padding: 30px 0 40px; gap: 22px;
     transform: translateY(-130%); transition: transform .4s var(--ease); border-bottom: 1px solid rgba(255,255,255,.06);
+    z-index: 950;
   }
   .navbar__links.is-open{ transform: translateY(0); }
   .navbar__cta{ display:none; }
   .navbar .navbar__socials{ display:none; }
-  .navbar__toggle{ display:flex; }
+  .navbar__toggle{ display:flex; padding: 8px; border-radius: 10px; background: rgba(var(--primary-rgb), .15); }
   /* keep contact socials visible - override navbar hide */
   .contact__socials{ display:flex !important; flex-wrap:wrap; gap:8px; }
 }
@@ -957,8 +958,8 @@ button{ font-size: max(16px, 1rem); }
    backdrop-filter is expensive; on small screens it causes jank while
    scrolling on mid-range Androids. Swap for a solid tint. */
 @media (max-width: 620px){
-  .navbar{ backdrop-filter: none; background: rgba(27,6,22,.95); }
-  .navbar__links{ backdrop-filter: none; background: rgba(27,6,22,.98); }
+  .navbar{ backdrop-filter: none; background: var(--bg); }
+  .navbar__links{ backdrop-filter: none; background: var(--bg); }
   .modal__backdrop{ backdrop-filter: none; background: rgba(11,6,23,.92); }
   .bg-decor{ opacity: .5; }
 }
