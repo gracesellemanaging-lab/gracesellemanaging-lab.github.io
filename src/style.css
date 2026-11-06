@@ -14,6 +14,7 @@
   --accent:    #FFC978;
   --success:   #22C55E;
   --text:      #FFF3F9;
+  --text-soft: #F3CBDD;
   --muted:     #E3A6C4;
 
   --primary-rgb: 255, 46, 147;
@@ -25,10 +26,11 @@
 
   /* Typography */
   --font-display: 'Space Grotesk', sans-serif;
-  --font-body:    'Inter', sans-serif;
+  --font-body:    'Manrope', sans-serif;
   --font-ui:      'Poppins', sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
   --font-hero:    'Syne', sans-serif;
+  --font-accent:  'Instrument Serif', serif;
 
   /* Layout */
   --container: 1180px;
@@ -65,6 +67,7 @@ body{
 img{ max-width: 100%; display: block; }
 a{ color: inherit; text-decoration: none; }
 ul{ list-style: none; }
+p{ line-height: 1.8; text-wrap: pretty; }
 button{ font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 input, textarea{ font: inherit; color: inherit; }
 .container{ width: min(92%, var(--container)); margin-inline: auto; }
@@ -81,6 +84,11 @@ input, textarea{ font: inherit; color: inherit; }
 .section__title{
   font-family: var(--font-display); font-weight:700; font-size: clamp(1.9rem, 4vw, 2.8rem);
   margin-bottom: 48px; max-width: 720px; letter-spacing:-.01em;
+}
+.accent{
+  font-family: var(--font-accent); font-style: italic; font-weight: 400;
+  font-size: 1.12em; letter-spacing: .01em; color: var(--accent);
+  padding-inline: .06em;
 }
 
 [data-reveal]{ opacity:0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
@@ -244,8 +252,10 @@ body.is-loading{ overflow:hidden; height:100vh; }
 }
 .typed-cursor{ color: var(--accent); animation: blink .9s step-end infinite; }
 .hero__desc{
-  max-width: 520px; color: var(--muted); font-size: 1.02rem; margin: 0 0 34px;
-  border-left: 2px solid rgba(var(--secondary-rgb), .45); padding-left: 18px;
+  max-width: 58ch; color: var(--text-soft);
+  font-size: clamp(1.06rem, .95rem + .45vw, 1.18rem);
+  line-height: 1.9; letter-spacing: .002em; margin: 0 0 34px;
+  border-left: 2px solid rgba(var(--secondary-rgb), .45); padding-left: 22px;
 }
 .hero__cta{ display:flex; gap:16px; flex-wrap:wrap; justify-content:flex-start; margin-bottom: 34px; }
 .social-icon{
@@ -292,8 +302,16 @@ body.is-loading{ overflow:hidden; height:100vh; }
   width:100%; height:100%; display:none; align-items:center; justify-content:center; position:relative;
   font-family: var(--font-display); font-weight:700; font-size: clamp(3rem, 8vw, 5rem); color: var(--text);
 }
-.about__copy p{ color: var(--muted); margin-bottom: 18px; }
-.about__copy strong{ color: var(--text); }
+.about__copy p{ color: var(--text-soft); margin-bottom: 20px; line-height: 1.9; }
+.about__copy > p:not(.section__eyebrow){ max-width: 68ch; }
+.about__copy > p:not(.section__eyebrow):first-of-type{
+  font-size: clamp(1.04rem, 1rem + .3vw, 1.14rem); color: var(--text);
+}
+.about__copy strong{
+  color: var(--text); font-weight: 700;
+  background: linear-gradient(transparent 64%, rgba(var(--primary-rgb), .25) 64%);
+  padding: 0 .08em;
+}
 .about__facts{
   display:flex; flex-wrap:wrap; gap: 10px; margin-top: 26px;
 }
@@ -358,7 +376,10 @@ body.is-loading{ overflow:hidden; height:100vh; }
 .soft-pill:hover{ transform: translateY(-4px); border-color: rgba(var(--secondary-rgb),.4); }
 
 /* ---------- 13. PROJECTS (work grid) ---------- */
-.projects__copy{ color: var(--muted); max-width: 560px; margin-bottom: 34px; }
+.projects__copy{
+  color: var(--text-soft); max-width: 62ch; margin-bottom: 38px;
+  font-size: clamp(1rem, .95rem + .3vw, 1.08rem); line-height: 1.85;
+}
 .filter-bar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 38px; }
 .filter-btn{
   padding: 10px 22px; border-radius: 999px; font-family: var(--font-ui); font-size:.88rem; color: var(--muted);
@@ -385,7 +406,7 @@ body.is-loading{ overflow:hidden; height:100vh; }
   text-transform:uppercase; letter-spacing:.08em; color: var(--secondary);
 }
 .work-card h3{ font-family: var(--font-display); font-size: 1.2rem; margin: 10px 24px 0; }
-.work-card > p{ color: var(--muted); font-size:.92rem; margin: 10px 24px 20px; }
+.work-card > p{ color: var(--text-soft); font-size:.94rem; line-height:1.75; margin: 10px 24px 20px; }
 .work-card__links{ display:flex; gap:10px; flex-wrap:wrap; padding: 0 24px 24px; }
 .btn-work{
   display:inline-flex; align-items:center; gap:6px; padding: 9px 18px; border-radius: 999px;
@@ -437,7 +458,7 @@ body.is-loading{ overflow:hidden; height:100vh; }
 }
 .timeline__date{ font-family: var(--font-mono); color: var(--secondary); font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; }
 .timeline__card h3{ font-family: var(--font-display); margin: 8px 0 10px; font-size:1.1rem; }
-.timeline__card p{ color: var(--muted); font-size:.92rem; }
+.timeline__card p{ color: var(--text-soft); font-size:.94rem; line-height:1.75; }
 
 /* ---------- 15. SERVICES (numbered rows) ---------- */
 .services__list{ display:flex; flex-direction:column; }
@@ -467,7 +488,7 @@ body.is-loading{ overflow:hidden; height:100vh; }
 }
 .service-row:hover > i{ background: var(--gradient-brand); color:#fff; border-color: transparent; transform: rotate(-5deg); }
 .service-row__body h3{ font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 6px; }
-.service-row__body p{ color: var(--muted); font-size: .92rem; max-width: 640px; }
+.service-row__body p{ color: var(--text-soft); font-size: .94rem; line-height: 1.75; max-width: 640px; }
 .service-row__arrow{
   width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
   border:1px solid rgba(255,255,255,.12); color: var(--muted);
@@ -520,7 +541,10 @@ body.is-loading{ overflow:hidden; height:100vh; }
 
 /* ---------- 18. CONTACT ---------- */
 .contact__grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap: 50px; }
-.contact__info p{ color: var(--muted); margin-bottom: 26px; }
+.contact__info p{
+  color: var(--text-soft); margin-bottom: 26px; max-width: 50ch;
+  font-size: clamp(1.02rem, .98rem + .3vw, 1.12rem); line-height: 1.85;
+}
 .contact__list{ display:flex; flex-direction:column; gap: 18px; margin-bottom: 30px; }
 .contact__list li{ display:flex; align-items:center; gap:14px; font-size:.94rem; }
 .contact__list i{ color: var(--secondary); width:18px; }

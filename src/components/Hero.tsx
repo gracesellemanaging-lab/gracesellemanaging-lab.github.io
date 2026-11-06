@@ -155,9 +155,9 @@ export default function Hero() {
             <span className="typed-cursor">|</span>
           </h2>
           <p className="hero__desc">
-            I design interfaces with heart playful, purposeful, and easy to fall in love with.
-            I turn wireframes into experiences people actually want to use, one thoughtful screen
-            at a time.
+            I design interfaces with <em className="accent">heart</em> playful,{' '}
+            <em className="accent">purposeful</em>, and easy to fall in love with. I turn wireframes
+            into experiences people actually want to use, one thoughtful screen at a time.
           </p>
           <div className="hero__cta">
             <ActionButton href="#projects" className="btn btn--primary" data-link>

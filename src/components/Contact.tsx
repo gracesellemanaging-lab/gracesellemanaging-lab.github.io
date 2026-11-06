@@ -140,8 +140,8 @@ export default function Contact() {
 
           <div className="contact__info" data-reveal data-reveal-delay="150">
             <p>
-              Have a project, an internship opening, or just a question about one of my designs? My
-              inbox is open.
+              Have a project, an internship opening, or just a question about one of my designs? My{' '}
+              <em className="accent">inbox is open</em>.
             </p>
             <div className="contact__cards">
               <a className="contact-card" href="mailto:gracesellemanaging@gmail.com">

@@ -16,7 +16,7 @@ export default function Projects() {
         </h2>
         <p className="projects__copy" data-reveal>
           A small selection of what I've designed and built. Each project taught me something new
-          and pushed me further.
+          and <em className="accent">pushed me further</em>.
         </p>
 
         <div className="filter-bar" data-reveal>
